@@ -133,6 +133,16 @@ resource "azurerm_application_gateway" "main" {
     }
   } 
 
+  dynamic "ssl_certificate" {
+    for_each = var.ssl_certificates
+    content {
+      name                = ssl_certificate.value.name
+      data                = ssl_certificate.value.key_vault_secret_id == null ? filebase64(ssl_certificate.value.data) : null
+      password            = ssl_certificate.value.key_vault_secret_id == null ? ssl_certificate.value.password : null
+      key_vault_secret_id = lookup(ssl_certificate.value, "key_vault_secret_id", null)
+    }
+  }
+
   dynamic "identity" {
     for_each = var.identity_ids != null ? [1] : []
     content {

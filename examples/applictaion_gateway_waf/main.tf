@@ -10,16 +10,16 @@ resource "azurerm_user_assigned_identity" "example" {
 }
 
 module "application-gateway" {
-  source  = "kumarvna/application-gateway/azurerm"
-  version = "1.1.0"
+   source = "../.."
 
   # By default, this module will not create a resource group and expect to provide 
   # a existing RG name to use an existing resource group. Location will be same as existing RG. 
   # set the argument to `create_resource_group = true` to create new resrouce.
+  
   resource_group_name  = "Ashwita"
   location             = "Central India"
-  virtual_network_name = "vnet-shared-hub-Central India-001"
-  subnet_name          = "snet-appgateway"
+  virtual_network_name = "testingcode"
+  subnet_name          = "sdefault"
   app_gateway_name     = "testgateway"
 
   sku = {
@@ -34,11 +34,11 @@ module "application-gateway" {
 
   backend_address_pools = [
     {
-      name  = "appgw-testgateway-Central India-bapool01"
+      name  = "appgw-testgateway-Central India-01pool"
       fqdns = ["example1.com", "example2.com"]
     },
     {
-      name         = "appgw-testgateway-Central India-bapool02"
+      name         = "appgw-testgateway-Central India-02pool"
       ip_addresses = ["1.2.3.4", "2.3.4.5"]
     }
   ]
@@ -130,10 +130,8 @@ module "application-gateway" {
 
   # Adding TAG's to Azure resources
   tags = {
+    CreatedBy    = "ashwita.pal@tothenew.com"
     ProjectName  = "demo-internal"
     Env          = "dev"
-    Owner        = "user@example.com"
-    BusinessUnit = "CORP"
-    ServiceClass = "Gold"
   }
 }

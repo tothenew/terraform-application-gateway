@@ -35,11 +35,11 @@ module "application-gateway" {
 
   backend_address_pools = [
     {
-      name  = "appgw-testgateway-Central India-bapool01"
+      name  = "appgw-testgateway-Central India-01pool"
       fqdns = ["example1.com", "example2.com"]
     },
     {
-      name         = "appgw-testgateway-Central India-bapool02"
+      name         = "appgw-testgateway-Central India-02pool"
       ip_addresses = ["1.2.3.4", "2.3.4.5"]
     }
   ]
@@ -89,11 +89,8 @@ module "application-gateway" {
 
   # Adding TAG's to Azure resources
   tags = {
-    CreatedBy = "ashwita.pal@tothenew.com"
+    CreatedBy    = "ashwita.pal@tothenew.com"
     ProjectName  = "demo-internal"
     Env          = "dev"
-    Owner        = "user@example.com"
-    BusinessUnit = "CORP"
-    ServiceClass = "Gold"
   }
 }

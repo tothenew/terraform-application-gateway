@@ -157,6 +157,17 @@ variable "request_routing_rules" {
   default = []
 }
 
+variable "ssl_certificates" {
+  description = "List of SSL certificates data for Application gateway"
+  type = list(object({
+    name                = string
+    data                = optional(string)
+    password            = optional(string)
+    key_vault_secret_id = optional(string)
+  }))
+  default = []
+}
+
 variable "identity_ids" {
   description = "Specifies a list with a single user managed identity id to be assigned to the Application Gateway"
   default     = null
