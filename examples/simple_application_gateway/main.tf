@@ -15,16 +15,17 @@ resource "azurerm_user_assigned_identity" "example" {
 }
 
 module "application-gateway" {
-    source = "../.."
+  source = "../.."
 
   # By default, this module will not create a resource group and expect to provide 
   # a existing RG name to use an existing resource group. Location will be same as existing RG. 
   # set the argument to `create_resource_group = true` to create new resrouce.
 
+  create_vnet = true
   resource_group_name  = "Ashwita"
   location             = "Central India"
   virtual_network_name = "testingcode"
-  subnet_name          = "default"
+  subnet_name          = "subnet01"
   app_gateway_name     = "testgateway"
 
   sku = {
@@ -69,7 +70,7 @@ module "application-gateway" {
 
   http_listeners = [
     {
-      name      = "appgw-testgateway-Central India-be-htln01"
+      name      = "appgw-testgateway-Central India-be-htln"
       host_name = null
     }
   ]
@@ -78,8 +79,8 @@ module "application-gateway" {
     {
       name                       = "appgw-testgateway-Central India-be-rqrt"
       rule_type                  = "Basic"
-      http_listener_name         = "appgw-testgateway-Central India-be-htln01"
-      backend_address_pool_name  = "appgw-testgateway-Central India-bapool01"
+      http_listener_name         = "appgw-testgateway-Central India-be-htln"
+      backend_address_pool_name  = "appgw-testgateway-Central India-01poo"
       backend_http_settings_name = "appgw-testgateway-Central India-be-http-set1"
     }
   ]

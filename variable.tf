@@ -10,7 +10,7 @@ variable "resource_group_name" {
 
 variable "location" {
   description = "The location/region to keep all your network resources."
-  default     = ""
+  default     = "central India"
 }
 
 variable "create_vnet" {
@@ -20,7 +20,7 @@ variable "create_vnet" {
 
 variable "virtual_network_name" {
   description = "Name of the virtual network"
-  default     = ""
+  default     = "testingApp"
 }
 
 variable "vnet_resource_group_name" {
@@ -30,7 +30,7 @@ variable "vnet_resource_group_name" {
 
 variable "subnet_name" {
   description = "Name of the subnet"
-  default     = ""
+  default     = "subnet1"
 }
 
 variable "virtual_network_address" {

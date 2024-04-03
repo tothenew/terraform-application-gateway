@@ -32,7 +32,8 @@ resource "azurerm_application_gateway" "main" {
 
   gateway_ip_configuration {
     name      = local.gateway_ip_configuration_name
-    subnet_id = data.azurerm_subnet.snet.id
+    # subnet_id = data.azurerm_subnet.snet.id
+    subnet_id = local.subnet_id
   }
 
   frontend_ip_configuration {
@@ -40,7 +41,7 @@ resource "azurerm_application_gateway" "main" {
     public_ip_address_id          = azurerm_public_ip.pip.id
     private_ip_address            = var.private_ip_address != null ? var.private_ip_address : null
     private_ip_address_allocation = var.private_ip_address != null ? "Static" : null
-    subnet_id                     = var.private_ip_address != null ? data.azurerm_subnet.snet.id : null
+    subnet_id                     = var.private_ip_address != null ? local.subnet_id : null
   }
 
   frontend_port {
