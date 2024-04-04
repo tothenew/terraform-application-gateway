@@ -10,11 +10,15 @@ resource "azurerm_user_assigned_identity" "example" {
 }
 
 module "application-gateway" {
-   source = "../.."
+  # source = "../.."
+  source = "git::https://github.com/tothenew/terraform-application-gateway.git"
 
-  # By default, this module will not create a resource group and expect to provide 
-  # a existing RG name to use an existing resource group. Location will be same as existing RG. 
-  # set the argument to `create_resource_group = true` to create new resrouce.
+
+  # By default, this module will not create a resource group and a virtual machine expect to provide 
+  # a existing RG name and vnet and subnet to use an existing resource group, virtual machine and subnet. Location will be same as existing RG. 
+  
+  # set `create_resource_group = true` to create new resrouce.
+  # set `  create_vnet = true` to create new virtual machine.
   
   resource_group_name  = "Ashwita"
   location             = "Central India"
