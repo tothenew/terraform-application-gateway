@@ -34,11 +34,11 @@ module "application-gateway" {
 
   backend_address_pools = [
     {
-      name  = "appgw-testgateway-Central India-01pool"
+      name  = "appgw-testgateway-01pool"
       fqdns = ["example1.com", "example2.com"]
     },
     {
-      name         = "appgw-testgateway-Central India-02pool"
+      name         = "appgw-testgateway-02pool"
       ip_addresses = ["1.2.3.4", "2.3.4.5"]
     }
   ]
@@ -46,7 +46,7 @@ module "application-gateway" {
   # `probe_name` argument is required if you are defing health probes.
   backend_http_settings = [
     {
-      name                  = "appgw-testgateway-Central India-be-http-set1"
+      name                  = "appgw-testgateway-http-set1"
       cookie_based_affinity = "Disabled"
       path                  = "/"
       enable_https          = true
@@ -59,7 +59,7 @@ module "application-gateway" {
       }
     },
     {
-      name                  = "appgw-testgateway-Central India-be-http-set2"
+      name                  = "appgw-testgateway-http-set2"
       cookie_based_affinity = "Enabled"
       path                  = "/"
       enable_https          = false
@@ -71,24 +71,24 @@ module "application-gateway" {
 
   http_listeners = [
     {
-      name                 = "appgw-testgateway-Central India-be-htln01"
-      ssl_certificate_name = "appgw-testgateway-Central India-ssl01"
+      name                 = "appgw-testgateway-htln01"
+      ssl_certificate_name = "appgw-testgateway-ssl01"
       host_name            = null
     }
   ]
 
   request_routing_rules = [
     {
-      name                       = "appgw-testgateway-Central India-be-rqrt"
+      name                       = "appgw-testgateway-rqrt"
       rule_type                  = "Basic"
-      http_listener_name         = "appgw-testgateway-Central India-be-htln01"
-      backend_address_pool_name  = "appgw-testgateway-Central India-bapool01"
-      backend_http_settings_name = "appgw-testgateway-Central India-be-http-set1"
+      http_listener_name         = "appgw-testgateway-htln01"
+      backend_address_pool_name  = "appgw-testgateway-01pool"
+      backend_http_settings_name = "appgw-testgateway-http-set1"
     }
   ]
 
   ssl_certificates = [{
-    name     = "appgw-testgateway-Central India-ssl01"
+    name     = "appgw-testgateway-ssl01"
     data     = "./keyBag.pfx"
     password = "P@$$w0rd123"
   }]

@@ -36,18 +36,18 @@ module "application-gateway" {
 
   backend_address_pools = [
     {
-      name  = "appgw-testgateway-Central India-01pool"
+      name  = "appgw-testgateway-01pool"
       fqdns = ["example1.com", "example2.com"]
     },
     {
-      name         = "appgw-testgateway-Central India-02pool"
+      name         = "appgw-testgateway-02pool"
       ip_addresses = ["1.2.3.4", "2.3.4.5"]
     }
   ]
 
   backend_http_settings = [
     {
-      name                  = "appgw-testgateway-Central India-be-http-set1"
+      name                  = "appgw-testgateway-http-set1"
       cookie_based_affinity = "Disabled"
       path                  = "/"
       enable_https          = false
@@ -60,7 +60,7 @@ module "application-gateway" {
       }
     },
     {
-      name                  = "appgw-testgateway-Central India-be-http-set2"
+      name                  = "appgw-testgateway-http-set2"
       cookie_based_affinity = "Enabled"
       path                  = "/"
       enable_https          = false
@@ -70,18 +70,18 @@ module "application-gateway" {
 
   http_listeners = [
     {
-      name      = "appgw-testgateway-Central India-be-htln"
+      name      = "appgw-testgatewayhtln"
       host_name = null
     }
   ]
 
   request_routing_rules = [
     {
-      name                       = "appgw-testgateway-Central India-be-rqrt"
+      name                       = "appgw-testgateway-rqrt"
       rule_type                  = "Basic"
-      http_listener_name         = "appgw-testgateway-Central India-be-htln"
-      backend_address_pool_name  = "appgw-testgateway-Central India-01poo"
-      backend_http_settings_name = "appgw-testgateway-Central India-be-http-set1"
+      http_listener_name         = "appgw-testgateway-htln"
+      backend_address_pool_name  = "appgw-testgateway-01pool"
+      backend_http_settings_name = "appgw-testgateway-http-set1"
     }
   ]
 
